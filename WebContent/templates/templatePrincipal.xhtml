@@ -31,8 +31,10 @@
 		<h:outputStylesheet name="estilo.css" library="css" id="cssStileSistema"/> 	
  	<h:body>
  			<script type="text/javascript" charset="UTF-8">
- 				$.noConflit();
- 				
+ 				$.noConflict();
+ 				localeData_pt_br();
+ 				initTamplete();
+ 				ocultarMenu();
  				
  				/*Bloqueia F5 do teclado*/
  				$(document).keydown(function(e){
@@ -110,6 +112,18 @@
  						<p:tieredMenu id="menuEsquerdo"
  						 style="width:185px; border: none; background:none; color:#000;">
  							
+ 							<sec:ifAnyGranted roles="CADASTRO_ACESSAR, ADMIN">
+ 								
+ 								<p:submenu label="Cadastros" id="subMenuCadastro">
+ 									<sec:ifAnyGranted roles="CIDADE_ACESSAR, ADMIN">
+	 									<p:menuitem value="Cidade" id="menuCidade"
+	 									  action="/cadastro/cad_cidade.jsf?faces-redirect=true">
+	 									
+	 									</p:menuitem>
+ 									</sec:ifAnyGranted>
+ 								</p:submenu>
+ 								
+ 							</sec:ifAnyGranted>
  							
  							
  						    <p:menuitem value="Início" id="menuinicio"
@@ -135,11 +149,12 @@
  			corpo	
  		</p:dialog>	
  			
-	<script>
-	   $('#menupop').hide();
-	</script>
  	</h:body>  
 </h:form>
-</sec:isAuthenticated>
 
+ <script type="text/javascript" charset="UTF-8">
+	 carregarIdElementosPagina();
+ </script>
+
+</sec:isAuthenticated>
 </html>
