@@ -28,7 +28,7 @@ public class SessionControllerImpl implements SessionController {
 				e.printStackTrace();
 			}
 		}else {
-			System.out.println("não tem usuoário");
+			System.out.println("não tem usuário");
 		}
 
 		hashMap.remove(keyLoginUser);
