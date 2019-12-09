@@ -9,11 +9,34 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:composition template="/templates/templatePrincipal.xhtml">
-		<ui:define name="corpo">		
+		<ui:define name="corpo">
+		
+		
 			<h:commandLink immediate="true">
-				<p:fileDownload value="#{cidadeBeanView.arquivoReport}"/>
+			    <f:setPropertyActionListener target="#{cidadeBeanView.tipoRelatorio}" value="1"/>
+				<p:fileDownload  value="#{cidadeBeanView.arquivoReport}"/>
 				<h:graphicImage library="img" name="pdf.png"/>
-			</h:commandLink>			
+			</h:commandLink>
+			
+			<h:commandLink immediate="true">
+			    <f:setPropertyActionListener target="#{cidadeBeanView.tipoRelatorio}" value="2"/>
+				<p:fileDownload  value="#{cidadeBeanView.arquivoReport}"/>
+				<h:graphicImage library="img" name="excel.png"/>
+			</h:commandLink>
+			
+			<h:commandLink immediate="true">
+			    <f:setPropertyActionListener target="#{cidadeBeanView.tipoRelatorio}" value="3"/>
+				<p:fileDownload  value="#{cidadeBeanView.arquivoReport}"/>
+				<h:graphicImage library="img" name="html.png"/>
+			</h:commandLink>
+			
+			<h:commandLink immediate="true">
+			    <f:setPropertyActionListener target="#{cidadeBeanView.tipoRelatorio}" value="4"/>
+				<p:fileDownload  value="#{cidadeBeanView.arquivoReport}"/>
+				<h:graphicImage library="img" name="ods.png"/>
+			</h:commandLink>
+			
+			
 			<h:form id="formCadastro" prependId="false">
 				<c:set var="isCadastro" value="true" scope="view"/>
 				<p:panel header="Cadastro de cidade" id="panelCadastro">
@@ -23,14 +46,15 @@
 						  value="#{cidadeBeanView.objetoSelecionado.cid_codigo}"/>
 						<h:outputLabel/>
 						
+						
 						<h:outputLabel id="labelNomeConsultaCidade" for="cidadeNome" value="Nome * :"/>
 						<p:inputText id="cidadeNome" styleClass="estyleInputNome" 
 						  required="true" maxlength="100" 
 						  value="#{cidadeBeanView.objetoSelecionado.cid_descricao}"
 						  requiredMessage="Informe o nome da cidade"/>
 						<p:message for="cidadeNome"/>
-						
-						
+
+
 						<h:outputLabel for="estado" id="labelEstado" value="Estado * :"/>
 						<p:selectOneMenu id="estado" required="true" style="width:200px;"
 						     requiredMessage="Informe o estado." 
@@ -49,15 +73,17 @@
 					 botaoNovo="#{contextoBean.possuiAcesso('CIDADE_NOVO', 'ADMIN')}"
 					 botaoSalvar="#{contextoBean.possuiAcesso('CIDADE_NOVO', 'ADMIN') and cidadeBeanView.objetoSelecionado.cid_codigo == null}"
 					 botaoAtualizar ="#{contextoBean.possuiAcesso('ACESSO_EDITAR', 'ADMIN') and cidadeBeanView.objetoSelecionado.cid_codigo != null}"
-					 >				
+					 >
+				
 				</util:botoesCrud>
-								
-			</h:form>
+			
+			</h:form>	
 			
 			<script type="text/javascript" charset="UTF-8">
-			    addFocoAoCampo("cidadeNome");
+			    addFocoCampo("cidadeNome");
 				gerenciaTeclaEnter();
 			</script>
+			
 			
 			<div class="espacoBranco" />
 			
@@ -65,17 +91,17 @@
 				emptyMessage="Não existem valores para exibição."
 				rendered="#{cidadeBeanView.list.size() > 0}"
 				rows="5"
-				paginator="true"
+				paginator="true" 
 				paginatorPosition="bottom"
-				paginatorTemplate="{FirstPageLink}
-				                   {PreviousPageLink} {PageLinks}
-				                   {NextPageLink} {LastPageLink}
-				                   {RowsPerPageDropdown} ">
-				
-				<ui:include src="/resources/components/colunasDataTableCidade.xhtml"/>
-				
-			</p:dataTable>		
+				paginatorTemplate=" {FirstPageLink}
+									{PreviousPageLink} {PageLinks}
+									{NextPageLink} {LastPageLink} 
+									{RowsPerPageDropdown} ">
+									
+			  <ui:include src="/resources/components/colunasDataTableCidade.xhtml"/>
 			
+			</p:dataTable>
+				
 		</ui:define>
 	</ui:composition>
 </html>
