@@ -12,7 +12,8 @@
 		<composite:interface displayName="interfacePesquisa" name="interfacePesquisa">
 			<composite:attribute name="managedBeanView" required="true"/>
 			<composite:attribute name="ocultaNovo" required="true"/>
-			<composite:attribute name="menuImpressao" required="false" default="true"/>
+			<composite:attribute name="menuImpressao" required="false" default="false"/>
+			<composite:attribute name="nomePesquisa" required="true"/>
 		</composite:interface>
 		
 		<composite:implementation>
@@ -32,6 +33,21 @@
 				</h:column>
 			</h:panelGrid>
 			
+			<p:spacer height="20px"/>
+			
+			<p:panel id="painelPesquisa" header="#{cc.attrs.nomePesquisa}">
+			
+				<h:panelGrid id="panelGridPesquisa" columns="7">
+					<h:outputLabel for="campo" id="labelCampo" value="Campo: "/>
+					<h:selectOneMenu style="width: 150px;" id="campo"
+						onchange=""
+						value="">
+						<f:selectItem var="campoPesquisaSelecionado" id="itensCampoPesquisa">
+						
+						</f:selectItem>					
+					</h:selectOneMenu>
+				</h:panelGrid>		
+			</p:panel>
 			
 			
 		
