@@ -39,13 +39,16 @@
 			
 				<h:panelGrid id="panelGridPesquisa" columns="7">
 					<h:outputLabel for="campo" id="labelCampo" value="Campo: "/>
-					<h:selectOneMenu style="width: 150px;" id="campo"
+					<p:selectOneMenu style="width: 150px;" id="campo"
 						onchange=""
 						value="">
-						<f:selectItem var="campoPesquisaSelecionado" id="itensCampoPesquisa">
+						<f:selectItems var="campoPesquisaSelecionado" 
+						itemLabel="#{campoPesquisaSelecionado.descricao}"
+						itemValue="#{campoPesquisaSelecionado.tipoClass}"
+						id="itensCampoPesquisa" value="#{cc.attrs.managedBeanView.listaCampoPesquisa}">
 						
-						</f:selectItem>					
-					</h:selectOneMenu>
+						</f:selectItems>					
+					</p:selectOneMenu>
 				</h:panelGrid>		
 			</p:panel>
 			
