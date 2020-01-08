@@ -3,10 +3,10 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:sec="http://www.springframework.org/security/facelets/tags"
 	xmlns:util="http://java.sun.com/jsf/composite/components"
-	xmlns:composite="http://java.sun.com/jsf/composite"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:composite="http://java.sun.com/jsf/composite">
 	
 	<h:form id="formPesquisa" prependId="false">
 		<composite:interface displayName="interfacePesquisa" name="interfacePesquisa">
@@ -18,7 +18,8 @@
 		
 		<composite:implementation>
 		
-			<c:set var="isCadastro" value="false" scope="view"/>			
+			<c:set var="isCadastro" value="false" scope="view"/>
+						
 			<h:panelGrid columns="2">
 			
 				
@@ -40,8 +41,9 @@
 				<h:panelGrid id="panelGridPesquisa" columns="7">
 					<h:outputLabel for="campo" id="labelCampo" value="Campo: "/>
 					<p:selectOneMenu style="width: 150px;" id="campo"
-						onchange=""
+						onchange="addMascaraPesquisa(this.value);"
 						value="#{cc.attrs.managedBeanView.objetoCampoConsultaSelecionado}">
+						
 						<f:selectItems var="campoPesquisaSelecionado" 
 						itemLabel="#{campoPesquisaSelecionado.descricao}"
 						itemValue="#{campoPesquisaSelecionado.tipoClass}"
@@ -50,16 +52,56 @@
 						</f:selectItems>					
 					</p:selectOneMenu>
 					
+					<h:outputLabel for="condicao" id="labelCondicao" value="Onde : "/>
+					<p:selectOneMenu style="width: 150px;" id="condicao"
+						value="#{cc.attrs.managedBeanView.condicaoPesquisaSelecionado}">
+						<f:selectItems 
+							id="itensCondicao"
+							value="#{cc.attrs.managedBeanView.listaCondicaoPesquisa}"/>
+					</p:selectOneMenu>
+					
+					<p:inputText id="valorPesquisa" immediate="false"
+					 onblur="validarCampoPesquisa(event);"
+					 value="#{cc.attrs.managedBeanView.valorPesquisa}"
+					 maxlength="65" 
+					 onkeypress="executaPesquisaComEnter(event, this);"/>
+					
 					<p:commandButton id="buttonPesquisar"
-						valeu="Filter" ajax="true" 
-						actionListener="#{cc.attrs.managedBeanView.consultarEntidade"}
+						value="Filtrar" ajax="true" 
+						actionListener="#{cc.attrs.managedBeanView.consultarEntidade}"
 						process="@this,panelGridPesquisa">					
 					</p:commandButton>
 					
 				</h:panelGrid>		
 			</p:panel>
 			
-			
+			<script type="text/javascript" charset="UTF-8">   	
+				var idCampo = getValorElementPorIdJQuery('campo');
+				var idCampoCondicao = getValorElementPorIdJQuery('condicao');
+				var idPesquisa = getValorElementPorIdJQuery('valorPesquisa');
+				
+				$(idPesquisa).keypress(permitNumber);
+				
+				$(idCampo + ' :nth-child(1)').prop('selected', true);
+				$(idCampoCondicao + ' :nth-child(1)').prop('selected', true);
+				$(idPesquisa).val('');
+				
+				addMascaraPesquisa($(idCampo).val()); 
+				
+				addFocoAoCampo('valorPesquisa');
+				
+				//chama o pesquisar ao dar enter na pesquisa
+				function executaPesquisaComEnter(event, button){
+					if (event.keyCode == 13){
+						event.preventDefault();    
+						addFocoAoCampo('buttonPesquisar');
+						
+						var buttonPesquisar = getValorElementPorIdJQuery('buttonPesquisar');
+						$(buttonPesquisar).click();
+					}
+				}
+				
+			</script>
 		
 		</composite:implementation>
 	</h:form>

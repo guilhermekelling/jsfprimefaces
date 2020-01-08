@@ -5,14 +5,25 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
+import javax.faces.component.html.HtmlInputHidden;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
 
+import org.hibernate.Query;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 import org.springframework.stereotype.Component;
 
 import br.com.framework.interfac.crud.InterfaceCrud;
 import br.com.project.annotation.IdentificaCampoPesquisa;
+import br.com.project.enums.CondicaoPesquisa;
 import br.com.project.report.util.BeanReportView;
+import br.com.project.util.all.Messagens;
+import br.com.project.util.all.UtilitariaRegex;
 
 @Component
 public abstract class BeanManagedViewAbstract extends BeanReportView {
@@ -26,6 +37,38 @@ public abstract class BeanManagedViewAbstract extends BeanReportView {
 	public ObjetoCampoConsulta objetoCampoConsultaSelecionado;
 	
 	public List<SelectItem> listaCampoPesquisa;
+
+	public List<SelectItem> listaCondicaoPesquisa;
+	
+	public CondicaoPesquisa condicaoPesquisaSelecionado;
+	
+	public String valorPesquisa;
+	
+	public void setValorPesquisa(String valorPesquisa) {
+		this.valorPesquisa = valorPesquisa;
+	}
+	
+	public String getValorPesquisa() {
+		return valorPesquisa != null ? new  UtilitariaRegex().retiraAcentos(valorPesquisa.trim() ): "";
+	}	
+	
+	public void setCondicaoPesquisaSelecionado(
+			CondicaoPesquisa condicaoPesquisaSelecionado) {
+		this.condicaoPesquisaSelecionado = condicaoPesquisaSelecionado;
+	}
+	
+	public CondicaoPesquisa getCondicaoPesquisaSelecionado() {
+		return condicaoPesquisaSelecionado;
+	}
+	
+	public List<SelectItem> getListaCondicaoPesquisa() {
+		listaCondicaoPesquisa = new ArrayList<SelectItem>();
+		for (CondicaoPesquisa enumCp : CondicaoPesquisa.values()) {
+			listaCondicaoPesquisa
+					.add(new SelectItem(enumCp, enumCp.toString()));
+		}
+		return listaCondicaoPesquisa; 
+	}
 
 	public ObjetoCampoConsulta getObjetoCampoConsultaSelecionado() {
 		return objetoCampoConsultaSelecionado;

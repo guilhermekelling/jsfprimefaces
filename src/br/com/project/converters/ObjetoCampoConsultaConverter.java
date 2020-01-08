@@ -15,7 +15,7 @@ public class ObjetoCampoConsultaConverter implements Converter, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public Object getAsObject(FacesContext arg0, UIComponent components, String value) {
+	public Object getAsObject(FacesContext arg0, UIComponent arg1, String value) {
 		if(value != null && !value.isEmpty()) {
 			String[] vals = value.split("\\*");
 			ObjetoCampoConsulta obConsulta = new ObjetoCampoConsulta();
