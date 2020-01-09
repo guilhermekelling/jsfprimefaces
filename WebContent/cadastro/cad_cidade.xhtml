@@ -63,9 +63,9 @@
 			
 			<div class="espacoBranco" />
 			
-			<p:dataTable id="tableResult" value="#{cidadeBeanView.list}" var="objeto"
+			<p:dataTable id="tableResult" value="#{cidadeBeanView.list.list}" var="objeto"
 				emptyMessage="Não existem valores para exibição."
-				rendered="#{cidadeBeanView.list.size() > 0}"
+				rendered="#{cidadeBeanView.list.list.size() > 0}"
 				rows="5"
 				paginator="true" 
 				paginatorPosition="bottom"

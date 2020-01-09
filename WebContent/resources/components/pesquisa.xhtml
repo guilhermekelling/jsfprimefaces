@@ -64,13 +64,14 @@
 					<p:inputText id="valorPesquisa" immediate="false"
 					 onblur="validarCampoPesquisa(event);"
 					 value="#{cc.attrs.managedBeanView.valorPesquisa}"
-					 maxlength="65" 
-					 onkeypress="executaPesquisaComEnter(event, this);"/>
+					 styleClass="valorPesquisa" maxlength="65" 
+					 onkeypress="executaPesquisaComEnter(event, this);"
+					 required="false" requiredMessage="Informe o valor do filtro."/>
 					
 					<p:commandButton id="buttonPesquisar"
-						value="Filtrar" ajax="true" 
+						styleClass="botaoPesquisa" value="Filtrar" ajax="true" 
 						actionListener="#{cc.attrs.managedBeanView.consultarEntidade}"
-						process="@this,panelGridPesquisa"
+						process="@this,painelPesquisa"
 						oncomplete="addFocoAoCampo('valorPesquisa');"
 						onsuccess="addFocoAoCampo('valorPesquisa');"
 						update=":formTemplate:msg, tableResult">					
@@ -82,14 +83,38 @@
 			<p:spacer/>
 			
 			<p:dataTable id="tableResult" rendered="true" 
-			    value="#{cc.attrs.managedBeanView.list}"
-				var="objeto" rows="10" 
-				paginatorPosition="bottom"
-				lazy="true" paginator="true" emptyMessage="Não existem valores para exibição."
+			    value="#{cc.attrs.managedBeanView.list}" 
+			    var="objeto" 							
+				rows="10" 
+				widgetVar="tableResult"
+				selectionMode="single" 
+				selection="#{cc.attrs.managedBeanView.objetoSelecionado}" 
+				rowKey="#{objeto}" 
+				paginatorPosition="bottom" 
+				lazy="true"
+				rowIndexVar="index"
+				paginator="true" 
+				emptyMessage="Não existem valores para exibição."	
 				paginatorTemplate=" {FirstPageLink}
 								   {PreviousPageLink} {PageLinks} 
 	 							   {NextPageLink} {LastPageLink} {RowsPerPageDropdown} ">
-	 			<ui:include src="#{cc.attrs.colunasGridDataTableList}" /> 
+	 	
+			<ui:include src="#{cc.attrs.colunasGridDataTableList}" />  
+				<p:column rendered="#{cc.attrs.exibirBotaoAdd}" style="width:70px;" id="colunaSelecionar" exportable="false" >
+					<center>
+						<f:facet name="header">Selecionar</f:facet>
+						<p:commandLink id="addPesquisa" immediate="true"
+										partialSubmit="true"
+										ajax="true"
+										process="@this, colunaSelecionar" onclick="#{cc.attrs.funcaoJavaScript}">
+							<h:graphicImage library="img" 
+											id="imgAddPesquisa"
+											name="add_16.png"
+											styleClass="bordaImagem" />
+						</p:commandLink>
+					</center>
+				</p:column>
+			
 	 		</p:dataTable>
 			
 			<script type="text/javascript" charset="UTF-8">   	

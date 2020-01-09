@@ -102,4 +102,11 @@ public class LoginBeanView extends BeanManagedViewAbstract {
 	}
 
 
+	@Override
+	public String condicaoAndParaPesquisa() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }
