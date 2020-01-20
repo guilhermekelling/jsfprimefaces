@@ -177,6 +177,16 @@
 			</p:column>			
 
 		</p:panelGrid>
+		
+		<p:spacer height="30px" />
+		
+		<p:commandButton value="Novo"
+			style="height:40px;width:100px;background:#CDCDC1;border: 1px solid #FFFFFF;"
+			rendered="#{contextoBean.possuiAcesso('MENSAGENS_ENVIAR_NOVO', 'ADMIN')}"
+			actionListener="#{mensagemBeanView.novo}" ajax="true" id="buttonNovo"
+			immediate="false" update="formCadastroMsgDialog, :formTemplate:msg">
+			<p:ajax listener="#{mensagemBeanView.novo}"/>
+		</p:commandButton>
 
 	</p:panel>
 </h:form>
