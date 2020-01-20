@@ -272,6 +272,20 @@ function addFocoAoCampo(campo) {
 	}
 }
 
+function pesquisarUserDestinoPerderFocoDialog(codUser) {
+	if (codUser.trim() != '') {		
+		 $("#usr_destinoMsgDialog").val('');
+		 $("#loginDestinoMsgDialog").val('');
+		 $.get("buscarUsuarioDestinoMsg?codEntidade=" + codUser, function(resposta) {
+		        if (resposta.trim() != ''){
+		        	var entidadeObj = JSON.parse(resposta);
+		        	$("#usr_destinoMsgDialog").val(entidadeObj.ent_codigo);
+		        	$("#loginDestinoMsgDialog").val(validaDescricao(entidadeObj.ent_login));
+		        }		  
+		 });
+	}
+}
+
 /**
  * Gera automaticamente mascara para a tela de pesquisa var classTypeString =
  * 'java.lang.String'; var classTypeLong = 'java.lang.Long'; var classTypeDate =
@@ -600,23 +614,6 @@ function pesquisarUserDestinoPerderFoco(id) {
 	        	var entidadeObj = JSON.parse(resposta);
 	        	$("#usr_destino").val(entidadeObj.ent_codigo);
 	        	$("#loginDestino").val(validaDescricao(entidadeObj.ent_login));
-	        }
-	   })
-	   .always(function() { 
-		   statusDialog.hide();
-		});
-	}
-}
-
-function pesquisarUserDestinoPerderFocoDialog(id) {
-	if (id.trim() != '') {
-	 statusDialog.show();
-	 $("#loginDestinoMsgDialog").val('');
-	 $.get("findUserDestino?codEntidade=" + id, function(resposta) {
-	        if (resposta != 'erro' && resposta.trim() != ''){
-	        	var entidadeObj = JSON.parse(resposta);
-	        	$("#usr_destinoMsgDialog").val(entidadeObj.ent_codigo);
-	        	$("#loginDestinoMsgDialog").val(validaDescricao(entidadeObj.ent_login));
 	        }
 	   })
 	   .always(function() { 

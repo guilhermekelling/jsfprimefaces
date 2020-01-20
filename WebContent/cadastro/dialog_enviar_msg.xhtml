@@ -1,0 +1,87 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:util="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="formCadastroMsgDialog" prependId="false">
+		<c:set var="isCadastro" value="true" scope="view" />
+	<p:panel header="Cadastro de Menssagem" id="panelCadastroMsgDialog">
+
+		<p:panelGrid id="gridMsgMsgDialog" columns="3">
+			<p:column>
+				<p:row>
+					<h:outputLabel for="idMsgDialog" value="Código : "
+						id="labelIdMsgDialog" style="width:300px;" />
+				</p:row>
+			</p:column>
+			<p:column>
+				<p:row>
+					<p:inputText id="idMsgDialog" styleClass="estiloIdCastro"
+						value="#{mensagemBeanView.objetoSelecionado.men_codigo}"
+						readonly="true" />
+				</p:row>
+			</p:column>
+			
+			<p:column />
+			
+			<p:column>
+				<p:row>
+					<h:outputLabel for="usr_origemMsgDialog" value="Origem : "
+						id="labelOrigemMsgDialog"  />
+				</p:row>
+			</p:column>
+
+			<p:column>
+				<p:row>
+					<p:inputText id="usr_origemMsgDialog" styleClass="estiloIdCastro"
+						value="#{mensagemBeanView.objetoSelecionado.usr_origem.ent_codigo}"
+						readonly="true" immediate="true" required="true" />
+					<p:outputLabel style="margin-left: 1px;" />
+					
+					<p:inputText id="loginOrigemMsgDialog" 
+						readonly="true"	immediate="true" required="true" style="width: 376px;" 
+						requiredMessage="Usuário logado não carregado" 
+						value="#{mensagemBeanView.objetoSelecionado.usr_origem.ent_login}"/>
+				</p:row>
+			</p:column>
+			
+			<p:column>
+				<p:row>
+					<p:message for="loginOrigemMsgDialog" />
+				</p:row>
+			</p:column>
+			
+			<p:column>
+				<p:row>
+					<h:outputLabel for="usr_destinoMsgDialog" value="Destino : "
+						id="labelDestinoMsgDialog" />
+				</p:row>
+			</p:column>
+			
+			<p:column>
+				<p:row>
+			
+					<p:inputText id="usr_destinoMsgDialog" styleClass="estiloIdCastro" immediate="true" required="true"
+						requiredMessage="Informe o usuário de destino."
+						value="#{mensagemBeanView.objetoSelecionado.usr_destino.ent_codigo}"
+						onblur="pesquisarUserDestinoPerderFocoDialog(this.value);"/>
+						
+					<p:inputText id="loginDestinoMsgDialog" readonly="true"
+						immediate="true"
+						value="#{mensagemBeanView.objetoSelecionado.usr_destino.ent_login}"
+						required="true" requiredMessage="Informe o usuário de destino."
+						style="width: 376px;" />
+				</p:row>
+			</p:column>
+			
+			
+
+		</p:panelGrid>
+
+	</p:panel>
+</h:form>
+</html>
