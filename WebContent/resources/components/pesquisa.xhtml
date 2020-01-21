@@ -15,6 +15,7 @@
 			<composite:attribute name="menuImpressao" required="false" default="false"/>
 			<composite:attribute name="nomePesquisa" required="true"/>
 			<composite:attribute name="colunasGridDataTableList" required="true" />
+			<composite:attribute name="funcaoJavaScript" required="false" />
 		</composite:interface>
 		
 		<composite:implementation>
@@ -100,20 +101,16 @@
 	 							   {NextPageLink} {LastPageLink} {RowsPerPageDropdown} ">
 	 	
 			<ui:include src="#{cc.attrs.colunasGridDataTableList}" />  
-				<p:column rendered="#{cc.attrs.exibirBotaoAdd}" style="width:70px;" id="colunaSelecionar" exportable="false" >
-					<center>
-						<f:facet name="header">Selecionar</f:facet>
-						<p:commandLink id="addPesquisa" immediate="true"
-										partialSubmit="true"
-										ajax="true"
-										process="@this, colunaSelecionar" onclick="#{cc.attrs.funcaoJavaScript}">
-							<h:graphicImage library="img" 
-											id="imgAddPesquisa"
-											name="add_16.png"
-											styleClass="bordaImagem" />
-						</p:commandLink>
-					</center>
-				</p:column>
+			<p:column id="colunaSelecionar" >
+				<center>
+					<f:facet name="header">Selecionar</f:facet>
+					<p:commandLink id="addPesquisa" immediate="true"
+										partialSubmit="true" ajax="true" process="@this, colunaSelecionar" 
+										onclick="#{cc.attrs.funcaoJavaScript}">
+						<h:graphicImage library="img" name="add_16.png" styleClass="bordaImagem" />
+					</p:commandLink>
+				</center>
+			</p:column>
 			
 	 		</p:dataTable>
 			

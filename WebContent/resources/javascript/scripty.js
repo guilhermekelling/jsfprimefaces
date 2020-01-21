@@ -273,7 +273,7 @@ function addFocoAoCampo(campo) {
 }
 
 function pesquisarUserDestinoPerderFocoDialog(codUser) {
-	if (codUser.trim() != '') {		
+	if (codUser != '') {		
 		 $("#usr_destinoMsgDialog").val('');
 		 $("#loginDestinoMsgDialog").val('');
 		 $.get("buscarUsuarioDestinoMsg?codEntidade=" + codUser, function(resposta) {

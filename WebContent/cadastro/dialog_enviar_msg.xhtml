@@ -213,9 +213,10 @@
 		height="400" dynamic="true" appendToBody="false" header="Consulta usuário destino" > 
 		
 			<util:pesquisa managedBeanView="#{funcionarioBeanView}"
-				ocultaNovo="true"
-				nomePesquisa="Pesquisa de usuário"				
-				colunasGridDataTableList="/resources/components/colunasDataTableFuncionario.xhtml" >
+				ocultaNovo="false"
+				nomePesquisa="Pesquisa de usuário"			
+				colunasGridDataTableList="/resources/components/colunasDataTableFuncionario.xhtml"
+				funcaoJavaScript="pesquisarUserDestinoPerderFocoDialog(#{objeto.ent_codigo}),destinoDialogMsgDialog.hide()" >
 			</util:pesquisa>
 		
 	 </p:dialog>
