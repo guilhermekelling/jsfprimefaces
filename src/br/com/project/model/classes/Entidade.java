@@ -15,6 +15,8 @@ import javax.persistence.TemporalType;
 import org.hibernate.envers.Audited;
 import org.primefaces.json.JSONObject;
 
+import br.com.project.annotation.IdentificaCampoPesquisa;
+
 @Audited
 @Entity
 public class Entidade implements Serializable {
@@ -31,6 +33,7 @@ public class Entidade implements Serializable {
 	
 	private boolean ent_inativo = false;
 	
+	@IdentificaCampoPesquisa(descricaoCampo = "Nome", campoConsulta = "ent_nomefantasia", principal = 1)	
 	private String ent_nomefantasia;
 	
 	@Temporal(TemporalType.TIMESTAMP)

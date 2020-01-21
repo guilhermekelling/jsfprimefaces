@@ -211,6 +211,13 @@
 	<p:dialog widgetVar="destinoDialogMsgDialog" 
 		id="destinoDialogMsgDialog" modal="false" resizable="false" 		
 		height="400" dynamic="true" appendToBody="false" header="Consulta usuário destino" > 
+		
+			<util:pesquisa managedBeanView="#{funcionarioBeanView}"
+				ocultaNovo="true"
+				nomePesquisa="Pesquisa de usuário"				
+				colunasGridDataTableList="/resources/components/colunasDataTableFuncionario.xhtml" >
+			</util:pesquisa>
+		
 	 </p:dialog>
 	 
 </h:form>
