@@ -187,6 +187,23 @@
 			immediate="false" update="formCadastroMsgDialog, :formTemplate:msg">
 			<p:ajax listener="#{mensagemBeanView.novo}"/>
 		</p:commandButton>
+		
+		
+		<p:commandButton value="Salvar"
+			style="height:40px;width:100px;background:#CDCDC1;border: 1px solid #FFFFFF;"
+			rendered="#{contextoBean.possuiAcesso('MENSAGENS_ENVIAR_NOVO', 'ADMIN') and mensagemBeanView.objetoSelecionado.men_codigo == null}"
+			actionListener="#{mensagemBeanView.saveNotReturn}" ajax="true"
+			partialSubmit="true" process="@this, @form" id="buttonSalvarDialogAlteraSenha"
+			immediate="false" update="formCadastroMsgDialog, :formTemplate:msg">
+		</p:commandButton>
+	
+		<p:commandButton value="Cancelar"
+			style="height:40px;width:100px;background:#CDCDC1;border: 1px solid #FFFFFF;"
+			onclick="enviarMsgDialog.hide();"
+			actionListener="#{mensagemBeanView.novo}" ajax="true" id="buttonCancelar" 
+			immediate="false" update="formCadastroMsgDialog, :formTemplate:msg">
+		</p:commandButton>
+			
 
 	</p:panel>
 </h:form>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import br.com.framework.interfac.crud.InterfaceCrud;
 import br.com.project.bean.geral.BeanManagedViewAbstract;
 import br.com.project.geral.controller.EntidadeController;
+import br.com.project.geral.controller.MensagemController;
 import br.com.project.model.classes.Entidade;
 import br.com.project.model.classes.Mensagem;
 
@@ -31,6 +32,9 @@ public class MensagemBeanView extends BeanManagedViewAbstract{
 	@Autowired
 	private EntidadeController entidadeController;
 	
+	@Autowired
+	private MensagemController mensagemController;
+	
 	@Override
 	public String novo() throws Exception {
 		//setarVariaveisNulas();
@@ -38,6 +42,13 @@ public class MensagemBeanView extends BeanManagedViewAbstract{
 		objetoSelecionado.setUsr_origem(contextoBean.getEntidadeLogada());
 		//objetoSelecionado.setUsr_destino(new Entidade());
 		return "";
+	}
+	
+	@Override
+	public void saveNotReturn() throws Exception {
+		mensagemController.merge(objetoSelecionado);
+		novo();
+		addMsg("Mensagem enviada com sucesso!");
 	}
 	
 	@Override

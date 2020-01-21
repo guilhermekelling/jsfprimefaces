@@ -129,6 +129,6 @@
 	 
 	 <!-- Controllers -->
 	 <bean id="sessionController" class="br.com.project.geral.controller.SessionControllerImpl" scope="singleton" />
-	 
+	 <bean id="mensagemController" name="mensagemController" class="br.com.project.geral.controller.MensagemController" />
 
 </beans>
