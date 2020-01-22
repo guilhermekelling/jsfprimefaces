@@ -34,6 +34,8 @@ public class FuncionarioBeanView extends BeanManagedViewAbstract {
 
 	private static final long serialVersionUID = 1L;
 	
+	private String urlFind = "/cadastro/find_funcionario.jsf?faces-redirect=true";
+	
 	private Entidade objetoSelecionado = new Entidade();
 	
 	@Autowired
@@ -49,6 +51,17 @@ public class FuncionarioBeanView extends BeanManagedViewAbstract {
 		return Entidade.class;
 	}
 
+	@Override
+	public void excluir() throws Exception {
+		if (objetoSelecionado.getEnt_codigo() != null
+				&& objetoSelecionado.getEnt_codigo() > 0) {
+			entidadeController.delete(objetoSelecionado);
+			list.remove(objetoSelecionado);
+			objetoSelecionado = new Entidade();
+			sucesso();
+		}		
+	}
+	
 	@Override
 	protected InterfaceCrud<?> getController() {
 		return entidadeController;
@@ -73,6 +86,11 @@ public class FuncionarioBeanView extends BeanManagedViewAbstract {
 	
 	public CarregamentoLazyListForObject<Entidade> getList() {
 		return list;
+	}
+	
+	@Override
+	public String redirecionarFindEntidade() throws Exception {
+		return urlFind;
 	}
 	
 	@Override

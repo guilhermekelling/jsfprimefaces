@@ -3,15 +3,23 @@ package br.com.project.model.classes;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
+import javax.persistence.UniqueConstraint;
+import org.hibernate.annotations.CollectionOfElements;
 import org.hibernate.envers.Audited;
 import org.primefaces.json.JSONObject;
 
@@ -40,6 +48,24 @@ public class Entidade implements Serializable {
 	private Date ent_ultimoacesso;
 	
 	private String tipoEntidade = "";
+	
+	@CollectionOfElements
+	@ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
+	@JoinTable(name = "entidadeacesso", 
+			uniqueConstraints = { @UniqueConstraint(name = "unique_acesso_entidade_key", 
+			columnNames = {
+			"ent_codigo", "esa_codigo" }) }, 
+			joinColumns = { @JoinColumn(name = "ent_codigo") })
+	@Column(name = "esa_codigo", length = 20)
+	private Set<String> acessos = new HashSet<String>();
+	
+	public void setAcessos(Set<String> acessos) {
+		this.acessos = acessos;
+	}
+	
+	public Set<String> getAcessos() {
+		return acessos;
+	}
 	
 	public void setTipoEntidade(String tipoEntidade) {
 		this.tipoEntidade = tipoEntidade;
