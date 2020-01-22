@@ -16,6 +16,7 @@
 			<composite:attribute name="nomePesquisa" required="true"/>
 			<composite:attribute name="colunasGridDataTableList" required="true" />
 			<composite:attribute name="funcaoJavaScript" required="false" />
+			<composite:attribute name="exibirBotaoAdd" required="true" default="false" />
 		</composite:interface>
 		
 		<composite:implementation>
@@ -101,7 +102,7 @@
 	 							   {NextPageLink} {LastPageLink} {RowsPerPageDropdown} ">
 	 	
 			<ui:include src="#{cc.attrs.colunasGridDataTableList}" />  
-			<p:column id="colunaSelecionar" >
+			<p:column id="colunaSelecionar" rendered="#{cc.attrs.exibirBotaoAdd}">
 				<center>
 					<f:facet name="header">Selecionar</f:facet>
 					<p:commandLink id="addPesquisa" immediate="true"
