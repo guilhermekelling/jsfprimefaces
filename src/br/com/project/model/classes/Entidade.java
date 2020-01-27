@@ -59,6 +59,16 @@ public class Entidade implements Serializable {
 	@Column(name = "esa_codigo", length = 20)
 	private Set<String> acessos = new HashSet<String>();
 	
+	private String email;
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	
 	public void setAcessos(Set<String> acessos) {
 		this.acessos = acessos;
 	}

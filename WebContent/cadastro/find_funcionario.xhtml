@@ -13,7 +13,7 @@
 	
 		<util:pesquisa managedBeanView="#{funcionarioBeanView}"
 			menuImpressao="true"
-			ocultaNovo = "#{!contextoBean.possuiAcesso('FUNCIONARIO_NOVO', 'ADMIN')}"			
+			ocultaNovo = "#{contextoBean.possuiAcesso('FUNCIONARIO_NOVO', 'ADMIN')}"			
 			nomePesquisa="Pesquisa de Funcionário"
 			exibirBotaoAdd="false"
 			colunasGridDataTableList="/resources/components/colunasDataTableFuncionario.xhtml">

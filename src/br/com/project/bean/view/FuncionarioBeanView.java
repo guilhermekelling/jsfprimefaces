@@ -26,6 +26,7 @@ import br.com.project.geral.controller.CidadeController;
 import br.com.project.geral.controller.EntidadeController;
 import br.com.project.model.classes.Cidade;
 import br.com.project.model.classes.Entidade;
+import br.com.project.util.all.Messagens;
 
 @Controller
 @Scope(value = "session")
@@ -35,6 +36,8 @@ public class FuncionarioBeanView extends BeanManagedViewAbstract {
 	private static final long serialVersionUID = 1L;
 	
 	private String urlFind = "/cadastro/find_funcionario.jsf?faces-redirect=true";
+	
+	private String url = "/cadastro/cad_funcionario.jsf?faces-redirect=true";
 	
 	private Entidade objetoSelecionado = new Entidade();
 	
@@ -47,9 +50,26 @@ public class FuncionarioBeanView extends BeanManagedViewAbstract {
 	private CarregamentoLazyListForObject<Entidade> list = new CarregamentoLazyListForObject<Entidade>();
 
 	@Override
-	protected Class<?> getClassImplement() {
+	public StreamedContent getArquivoReport() throws Exception {
+		super.setNomeRelatorioJasper("report_funcionario");
+		super.setNomeRelatorioSaida("report_funcionario");
+		super.setListDataBeanCollectionReport(entidadeController.
+				findList(getClassImplement()));
+		return super.getArquivoReport();
+	}
+	
+	
+	@Override
+	protected Class<Entidade> getClassImplement() {
 		return Entidade.class;
 	}
+	
+	@Override
+	public String novo() throws Exception {
+		objetoSelecionado = new Entidade();
+		list.clean();
+		return url;
+	}	
 
 	@Override
 	public void excluir() throws Exception {
@@ -100,5 +120,31 @@ public class FuncionarioBeanView extends BeanManagedViewAbstract {
 		list.setTotalRegistroConsulta(super.totalRegistroConsulta(), 
 				super.getSqlLazyQuery());		
 	}
-
+	
+	@Override
+	public void saveNotReturn() throws Exception {
+		if (!objetoSelecionado.getAcessos().contains("USER")) {
+			objetoSelecionado.getAcessos().add("USER");
+		}
+		objetoSelecionado = entidadeController.merge(objetoSelecionado);
+		list.add(objetoSelecionado);		
+		objetoSelecionado = new Entidade();
+		sucesso();
+	}
+	
+	@Override
+	public void saveEdit() throws Exception {
+		objetoSelecionado = entidadeController.merge(objetoSelecionado);
+		list.add(objetoSelecionado);
+		
+		objetoSelecionado = new Entidade();
+		Messagens.msgSeverityInfor("Atualizado com sucesso!");
+	}
+	
+	@Override
+	public String editar() throws Exception {
+		list.clean();
+		return url;
+	}
+	
 }
