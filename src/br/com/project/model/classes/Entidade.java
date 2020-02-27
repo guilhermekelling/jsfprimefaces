@@ -16,6 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
@@ -25,9 +27,12 @@ import org.primefaces.json.JSONObject;
 
 import br.com.project.annotation.IdentificaCampoPesquisa;
 
+@SuppressWarnings("deprecation")
 @Audited
 @Entity
-public class Entidade implements Serializable {
+@Table(name = "entidade")
+@SequenceGenerator(name = "entidade_seq", sequenceName = "entidade_seq", initialValue = 1, allocationSize = 1)
+public class Entidade implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -58,7 +63,7 @@ public class Entidade implements Serializable {
 			joinColumns = { @JoinColumn(name = "ent_codigo") })
 	@Column(name = "esa_codigo", length = 20)
 	private Set<String> acessos = new HashSet<String>();
-	
+
 	private String email;
 	
 	public void setEmail(String email) {
@@ -164,5 +169,11 @@ public class Entidade implements Serializable {
 		map.put("ent_login", ent_login);
 		map.put("ent_nomefantasia", ent_nomefantasia);
 		return new JSONObject(map);
+	}
+	
+	@Override
+	public String toString() {
+		return "Entidade [ent_codigo=" + ent_codigo + ", ent_nomefantasia="
+				+ ent_nomefantasia + "]";
 	}
 }

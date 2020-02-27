@@ -48,16 +48,14 @@ public class FuncionarioBeanView extends BeanManagedViewAbstract {
 	private EntidadeController entidadeController;
 	
 	private CarregamentoLazyListForObject<Entidade> list = new CarregamentoLazyListForObject<Entidade>();
-
+	
 	@Override
 	public StreamedContent getArquivoReport() throws Exception {
 		super.setNomeRelatorioJasper("report_funcionario");
 		super.setNomeRelatorioSaida("report_funcionario");
-		super.setListDataBeanCollectionReport(entidadeController.
-				findList(getClassImplement()));
+		super.setListDataBeanCollectionReport(entidadeController.findList(getClassImplement()));
 		return super.getArquivoReport();
 	}
-	
 	
 	@Override
 	protected Class<Entidade> getClassImplement() {
