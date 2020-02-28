@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.model.SelectItem;
 
@@ -30,7 +31,7 @@ import br.com.project.model.classes.Titulo;
 import br.com.project.util.all.Messagens;
 
 @Controller
-@Scope(value = "session")
+@Scope(value = "view")
 @ManagedBean(name = "tituloBeanView")
 public class TituloBeanView extends BeanManagedViewAbstract {
 
@@ -49,6 +50,11 @@ public class TituloBeanView extends BeanManagedViewAbstract {
 	private TituloController tituloController;
 	
 	private CarregamentoLazyListForObject<Titulo> list = new CarregamentoLazyListForObject<Titulo>();
+	
+	@PostConstruct
+	public void init() throws Exception {
+		objetoSelecionado.setEnt_codigoabertura(contextoBean.getEntidadeLogada());
+	}
 	
 	@Override
 	public StreamedContent getArquivoReport() throws Exception {
