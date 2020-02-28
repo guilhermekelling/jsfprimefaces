@@ -1,6 +1,7 @@
 package br.com.project.geral.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,10 @@ public class EntidadeController extends ImplementacaoCrud<Entidade> implements
 
 	public void updateUltimoAcessoUser(String name) {
 		srvEntidade.updateUltimoAcessoUser(name);
+	}
+
+	public List<Entidade> pesquisarPorNome(String nome) throws Exception {
+		return (List<Entidade>) getSession().createQuery("select e from Entidade e where e.ent_nomefantasia like '%" + nome + "%'").list();
 	}
 
 }

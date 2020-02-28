@@ -165,6 +165,36 @@
 								</p:row>
 							</p:column>		
 							
+							<p:column>
+								<p:row>
+									<h:outputLabel for="autoCompletePagador" value="Pagador: " 
+										style="width:300px;" />
+								</p:row>
+							</p:column>										
+																
+							<p:column>
+								<p:row>
+									<p:autoComplete id="autoCompletePagador"
+									minQueryLength="4"
+									placeholder="Digite 4 letras min."
+									queryDelay="3000"
+									completeMethod="#{tituloBeanView.pesquisarPagador}"
+									value="#{tituloBeanView.objetoSelecionado.ent_codigo}"
+									var="ent"
+									itemValue="#{ent}"
+									itemLabel="#{ent.ent_nomefantasia}"
+									converter="entidadeConverter">
+									
+									</p:autoComplete>								
+								</p:row>
+							</p:column>				
+																	
+							<p:column>
+								<p:row>
+									<p:message for="autoCompletePagador" />
+								</p:row>
+							</p:column>	
+							
 						</p:panelGrid>
 					</p:panel>
 					
@@ -173,8 +203,8 @@
 					<util:botoesCrud managedBeanView="#{tituloBeanView}"
 						camposReload=":formTemplate:msg, tableResult"
 						botaoNovo = "#{contextoBean.possuiAcesso('TITULO_NOVO', 'ADMIN')}"
-						botaoSalvar = "#{contextoBean.possuiAcesso('TITULO_NOVO', 'ADMIN') and tituloBeanView.objetoSelecionado.ent_codigo == null}"
-						botaoAtualizar = "#{contextoBean.possuiAcesso('TITULO_EDITAR', 'ADMIN') and tituloBeanView.objetoSelecionado.ent_codigo != null}"
+						botaoSalvar = "#{contextoBean.possuiAcesso('TITULO_NOVO', 'ADMIN') and tituloBeanView.objetoSelecionado.tit_codigo == null}"
+						botaoAtualizar = "#{contextoBean.possuiAcesso('TITULO_EDITAR', 'ADMIN') and tituloBeanView.objetoSelecionado.tit_codigo != null}"
 						botaoExcluir = "#{contextoBean.possuiAcesso('TITULO_EXCLUIR', 'ADMIN')}" >
 					</util:botoesCrud>	
 					

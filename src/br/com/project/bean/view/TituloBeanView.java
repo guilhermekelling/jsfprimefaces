@@ -24,6 +24,7 @@ import br.com.project.acessos.Permissao;
 import br.com.project.bean.geral.BeanManagedViewAbstract;
 import br.com.project.carregamento.lazy.CarregamentoLazyListForObject;
 import br.com.project.geral.controller.CidadeController;
+import br.com.project.geral.controller.EntidadeController;
 import br.com.project.geral.controller.TituloController;
 import br.com.project.model.classes.Cidade;
 import br.com.project.model.classes.Entidade;
@@ -31,7 +32,7 @@ import br.com.project.model.classes.Titulo;
 import br.com.project.util.all.Messagens;
 
 @Controller
-@Scope(value = "view")
+@Scope(value = "session")
 @ManagedBean(name = "tituloBeanView")
 public class TituloBeanView extends BeanManagedViewAbstract {
 
@@ -48,6 +49,9 @@ public class TituloBeanView extends BeanManagedViewAbstract {
 	
 	@Autowired
 	private TituloController tituloController;
+	
+	@Autowired
+	private EntidadeController entidadeController;
 	
 	private CarregamentoLazyListForObject<Titulo> list = new CarregamentoLazyListForObject<Titulo>();
 	
@@ -149,5 +153,10 @@ public class TituloBeanView extends BeanManagedViewAbstract {
 		list.clean();
 		return url;
 	}
-	
+
+	public List<Entidade> pesquisarPagador(String nome) throws Exception{
+		
+		return entidadeController.pesquisarPorNome(nome);
+		
+	}
 }
