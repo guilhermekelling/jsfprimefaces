@@ -76,6 +76,7 @@ public class TituloBeanView extends BeanManagedViewAbstract {
 	@Override
 	public String novo() throws Exception {
 		objetoSelecionado = new Titulo();
+		init();
 		list.clean();
 		return url;
 	}	
@@ -119,6 +120,7 @@ public class TituloBeanView extends BeanManagedViewAbstract {
 	
 	@Override
 	public String redirecionarFindEntidade() throws Exception {
+		novo();
 		return urlFind;
 	}
 	
