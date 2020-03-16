@@ -54,6 +54,9 @@ public class Entidade implements Serializable{
 	
 	private String tipoEntidade = "";
 	
+	@Column(unique = true)
+	private String cpf;
+	
 	@CollectionOfElements
 	@ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
 	@JoinTable(name = "entidadeacesso", 
@@ -65,7 +68,15 @@ public class Entidade implements Serializable{
 	private Set<String> acessos = new HashSet<String>();
 
 	private String email;
-	
+		
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -176,4 +187,6 @@ public class Entidade implements Serializable{
 		return "Entidade [ent_codigo=" + ent_codigo + ", ent_nomefantasia="
 				+ ent_nomefantasia + "]";
 	}
+	
+	
 }

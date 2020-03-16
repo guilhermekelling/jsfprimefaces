@@ -39,14 +39,31 @@
 										required="true" requiredMessage="Informe o nome."
 										value="#{funcionarioBeanView.objetoSelecionado.ent_nomefantasia}" />
 								</p:row>
-							</p:column>							
+							</p:column>		
 							<p:column>
 								<p:row>
 									<p:message for="ent_nomefantasia" />
 								</p:row>
+							</p:column>	
+							
+							<p:column>
+								<p:row>
+									<h:outputLabel for="cpf" value="CPF : " 
+										style="width:300px;" />
+								</p:row>
+							</p:column>	
+							<p:column>
+								<p:row>
+									<p:inputMask mask="999.999.999-99" id="cpf" maxlength="100" style="width:350px;"
+										required="true" requiredMessage="Informe o cpf"
+										value="#{funcionarioBeanView.objetoSelecionado.cpf}" />
+								</p:row>
 							</p:column>
-							
-							
+							<p:column>
+								<p:row>
+									<p:message for="cpf" />
+								</p:row>
+							</p:column>						
 							<p:column>
 								<p:row>
 									<h:outputLabel for="tipoEntidade" value="Tipo: " 
