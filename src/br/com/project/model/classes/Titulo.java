@@ -44,6 +44,8 @@ public class Titulo implements Serializable {
 	@IdentificaCampoPesquisa(descricaoCampo = "Origem", campoConsulta = "tit_origem")
 	private String tit_origem; /*Comissão ou Origem*/
 	
+	private String campo_teste;
+	
 	@IdentificaCampoPesquisa(descricaoCampo = "Valor R$", campoConsulta = "tit_valor")
 	@Column(scale = 4, precision = 15)
 	private BigDecimal tit_valor = BigDecimal.ZERO;
@@ -160,5 +162,12 @@ public class Titulo implements Serializable {
 	public void setVersionNum(int versionNum) {
 		this.versionNum = versionNum;
 	}
-	
+
+	public String getCampo_teste() {
+		return campo_teste;
+	}
+
+	public void setCampo_teste(String campo_teste) {
+		this.campo_teste = campo_teste;
+	}
 }
